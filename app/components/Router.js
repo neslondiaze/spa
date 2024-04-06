@@ -9,7 +9,6 @@ export async function Router() {
     $main = d.getElementById("main");
 
   let { hash } = location;
-  console.log(hash);
 
   $main.innerHTML = null;
 
@@ -27,16 +26,14 @@ export async function Router() {
   } else if (hash === "#/contacto") {
     $main.innerHTML = "<h2>Sección del Contacto</h2>";
   } else {
-    $main.innerHTML =
-      "<h2>Aquí cargara el contenido de el Post previamente seleccionado</h2>";
-/*           await ajax({
-            url: api.POSTS,
-            cbSuccess: (posts) => {
-              let html = "";
-              posts.forEach((post) => (html += PostCard(post)));
-              $main.innerHTML = html;
+            await ajax({
+            url: `${api.POST}/${localStorage.getItem("wpPostId")}`,
+            cbSuccess: (post) => {
+/*                let html = "";
+              html += PostCard(post); */
+              $main.innerHTML = Post(post);
             },
           });
-  } */
+  }
   d.querySelector(".loader").style.display = "none";
-}}
+}
